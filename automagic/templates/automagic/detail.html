@@ -1,0 +1,13 @@
+{% extends "automagic/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ object }}{% endblock %}
+
+{% block content %}
+    <dl class="dl-horizontal">
+        {% for field, value in object.get_fields_and_values %}
+            <dt>{{ field.verbose_name }}</dt>
+            <dd>{{ value }}</dd>
+        {% endfor %}
+    </dl>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "automagic/base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans %}Are you sure you want to delete "{{ object }}"?{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="alert alert-warning">
+            {% blocktrans %}Are you sure you want to delete "{{ object }}"?{% endblocktrans %}
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-danger">{% trans "Confirm" %}</button>
+            <a href="{{ request.META.HTTP_REFERER|default:'javascript:history.go(-1)' }}" class="btn btn-default">{% trans "Cancel" %}</a>
+        </div>
+    </form>
+{% endblock %}
