@@ -6,7 +6,7 @@ from .models import AutomagicModel
 class MyFooModel(AutomagicModel):
     title = models.CharField(max_length=20)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class AutomagicModelTest(TestCase):
