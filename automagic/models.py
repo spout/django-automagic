@@ -92,12 +92,18 @@ class AutomagicModel(models.Model):
             view_class = import_string(class_path)
         return view_class.as_view(**kwargs)
 
+    def __str__(self):
+        for attr in app_settings.get('STR_ATTRS'):
+            if hasattr(self, attr):
+                return getattr(self, attr)
+        return self.__repr__()
+
     def get_canonical_slug(self):
         """
         For braces.views.CanonicalSlugDetailMixin
         """
-        if hasattr(self, 'slug'):
-            return self.slug
+        if hasattr(self, app_settings.get('SLUG_ATTR')):
+            return getattr(self, app_settings.get('SLUG_ATTR'))
         else:
             return slugify(self.__str__())
 
